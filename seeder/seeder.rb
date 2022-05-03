@@ -1,5 +1,8 @@
 #Request url for sub-categories
-#id = 15 (Electro)
+url = "https://www.disco.com.ar/_v/private/graphql/v1?workspace=master&maxAge=long&appsEtag=remove&domain=store&locale=es-AR&__bindingId=0beab475-23b8-4674-b38a-956cc988dade"
+# method: 'POST',
+# body: '{"operationName":"categoryChildren","variables":{},"extensions":{"persistedQuery":{"version":1,"sha256Hash":"3630a63bf8c6e85633d2eec9b120514b860c329a6b884a9240b5740aee65040b","sender":"discoargentina.store-theme@4.x","provider":"vtex.catalog-graphql@1.x"},"variables":"eyJpZCI6IjE1In0="}}'
+
 pages << {
     url: url,
     method: 'POST',
