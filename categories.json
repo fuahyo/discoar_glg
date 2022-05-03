@@ -1,0 +1,66 @@
+{
+    "data": {
+        "categoryChildren": [
+            {
+                "id": "113",
+                "name": "TV y Video",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "114",
+                "name": "Aire Acondicionado y Ventilación",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "115",
+                "name": "Audio",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "116",
+                "name": "Calefacción, Calefones y Termotanques",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "117",
+                "name": "Cocinas y Hornos",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "118",
+                "name": "Consolas y Videojuegos",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "119",
+                "name": "Fotografía",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "120",
+                "name": "Heladeras, Freezers y Cavas",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "121",
+                "name": "Informática",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "122",
+                "name": "Lavado",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "123",
+                "name": "Pequeños Electros",
+                "__typename": "CategoryItem"
+            },
+            {
+                "id": "124",
+                "name": "Teléfonos",
+                "__typename": "CategoryItem"
+            }
+        ]
+    }
+}

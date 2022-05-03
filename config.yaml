@@ -4,10 +4,10 @@ seeder:
 parsers:
   - page_type: sub_categories
     file: ./parsers/sub_categories.rb
-    disable: false
+    disable: true
   - page_type: categories
     file: ./parsers/categories.rb
-    disabled: true
+    disabled: false
   - page_type: product
     file: ./parsers/product.rb
     disabled: false
