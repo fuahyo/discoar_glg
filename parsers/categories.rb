@@ -1,0 +1,1 @@
+body = JSON.parse(content)
