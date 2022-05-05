@@ -7,7 +7,7 @@ pages << {
     url: url,
     method: 'POST',
     page_type: 'categories',
-    body: '{"operationName":"categoryChildren","variables":{},"extensions":{"persistedQuery":{"version":1,"sha256Hash":"6869499be99f20964918e2fe0d1166fdf6c006b1766085db9e5a6bc7c4b957e5","sender":"discoargentina.store-theme@4.x","provider":"vtex.catalog-graphql@1.x"},"variables":"eyJpZCI6IjE1In0="}}',
+    body: '{"operationName":"categoryChildren","variables":{},"extensions":{"persistedQuery":{"version":1,"sha256Hash":"39cf66d6a81a0e006e763a7d35c9e953e277a814819777a00c28eefdfad6e7d4","sender":"discoargentina.store-theme@4.x","provider":"vtex.catalog-graphql@1.x"},"variables":"eyJpZCI6IjE1In0="}}',
     headers: {
         'Accept' => '*/*',
         'Accept-Encoding' => 'gzip, deflate, br',
