@@ -16,6 +16,7 @@ body['data']['categoryChildren'].each do |cat|
         headers: page['headers'],
         vars: {
             url_variables: variables,
+            page_num: 1,
         },
     }
 end
