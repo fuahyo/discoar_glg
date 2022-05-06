@@ -1,10 +1,20 @@
 body = JSON.parse(content)
-
+# require 'byebug'
 products = body['data']['productSearch']['products']
 products.each_with_index do |prod, i|
     categories = prod['categories']
+    
     category = categories.last.gsub('/','')
-    sub_category = categories[1].split('/').delete_at(0).join('>')
+    sub_category_arr = categories[0].split('/')
+    sub_category = []
+    sub_category_arr.each do |sub_cat|
+        if sub_cat != category && !sub_cat.empty?
+            sub_category.push(sub_cat)
+        end
+    end
+    # byebug
+    sub_category = sub_category.join('>')
+    
     url = 'https://www.disco.com.ar' + prod['link']
 
     out = {
