@@ -11,7 +11,8 @@ body['data']['categoryChildren'].each do |cat|
     pages << {
         url: url,
         page_type: "sub_categories",
-        http2: false,
+        http2: true,
+        fetch_type: 'browser',
         method: "GET",
         headers: page['headers'],
         vars: {
