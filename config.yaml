@@ -13,7 +13,7 @@ parsers:
     disabled: false
   - page_type: details
     file: ./parsers/details.rb
-    disabled: false
+    disabled: true
 exporters:
   - exporter_name: products_json
     exporter_type: json
