@@ -66,6 +66,7 @@ products.each_with_index do |prod, i|
         url: url,
         page_type: "details",
         http2: false,
+        fetch_type: 'browser',
         method: "GET",
         headers: page['headers'],
         vars: {

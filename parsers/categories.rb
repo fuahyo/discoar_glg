@@ -6,13 +6,12 @@ body['data']['categoryChildren'].each do |cat|
     # require 'byebug'
     # byebug
     encoded_variables = Base64.strict_encode64(JSON.generate(variables))
-    url = 'https://www.disco.com.ar/_v/segment/graphql/v1?workspace=master&maxAge=short&appsEtag=remove&domain=store&locale=es-AR&__bindingId=0beab475-23b8-4674-b38a-956cc988dade&operationName=Products&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"49a77e3e2082563773aff56ad9c0432d59302e86fd1baaad9ca0f4bca2630d46","sender":"vtex.store-resources@0.x","provider":"vtex.search-graphql@0.x"},"variables":"' +encoded_variables+ '"}'
+    url = 'https://www.disco.com.ar/_v/segment/graphql/v1?workspace=master&maxAge=short&appsEtag=remove&domain=store&locale=es-AR&__bindingId=0beab475-23b8-4674-b38a-956cc988dade&operationName=productSearchV3&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"6869499be99f20964918e2fe0d1166fdf6c006b1766085db9e5a6bc7c4b957e5","sender":"vtex.store-resources@0.x","provider":"vtex.search-graphql@0.x"},"variables":"'+encoded_variables+'"}'
 
     pages << {
         url: url,
         page_type: "sub_categories",
         http2: true,
-        fetch_type: 'browser',
         method: "GET",
         headers: page['headers'],
         vars: {
