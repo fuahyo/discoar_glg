@@ -1,12 +1,18 @@
 body = JSON.parse(content)
 # require 'byebug'
+
 products = body['data']['productSearch']['products']
 products.each_with_index do |prod, i|
     categories = prod['categories']
-
-    measurement_body = JSON.parse(prod['specificationGroups'][1]['specifications'][0]['values'].first)
-    sku_body = JSON.parse(prod['specificationGroups'][1]['specifications'][1]['values'].first)
-
+    measurement_body = ''
+    sku_body = ''
+    prod['specificationGroups'].each_with_index do |spec_body, j|
+        if spec_body['name'] == 'Configuraciones'
+            measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first)
+            sku_body = JSON.parse(spec_body['specifications'][1]['values'].first)
+        end
+    end
+    # byebug
     item_size = measurement_body['unit_multiplier_un']
     uom = measurement_body['measurement_unit_un']
     product_pieces = measurement_body['unit_multiplier']
@@ -33,7 +39,7 @@ products.each_with_index do |prod, i|
     sub_category = sub_category.join(' > ')
     
     url = 'https://www.disco.com.ar' + prod['link']
-
+    # byebug
     out = {
         '_collection' => 'items',
         '_id' => prod['productId'],
@@ -71,7 +77,7 @@ products.each_with_index do |prod, i|
         'country_of_origin'=> nil,
         'variants'=> nil,
     }
-
+    
     pages << {
         url: url,
         page_type: "details",

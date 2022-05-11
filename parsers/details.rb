@@ -2,9 +2,8 @@ html = Nokogiri::HTML(content)
 vars = page['vars']
 out = vars['out']
 
-script = html.css('script[type="application/ld+json"]').text
-# require 'byebug'
-# byebug
+script = html.css('script[type="application/ld+json"]')[0].text
+
 json = JSON.parse(script)
 
 if html.at('div.flex.flex-grow-1.w-100.flex-column .discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').nil?
@@ -69,7 +68,7 @@ outputs << {
     'crawled_source'=>'WEB',
     'is_promoted' => is_promoted,
     'type_of_promotion' => type_of_promotion,
-    'promo_attributes'=> promo_attributes.empty? ? nil : promo_attributes,
+    'promo_attributes'=> promo_attributes.nil? ? nil : promo_attributes,
     'is_private_label' => false,
     'latitude' => nil,
     'longitude' => nil,
@@ -79,4 +78,4 @@ outputs << {
     'item_identifiers'=> nil,
     'country_of_origin'=> nil,
     'variants'=> nil,
-}
+}.merge(out)
