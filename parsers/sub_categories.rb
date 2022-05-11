@@ -3,7 +3,24 @@ body = JSON.parse(content)
 products = body['data']['productSearch']['products']
 products.each_with_index do |prod, i|
     categories = prod['categories']
-    
+
+    measurement_body = JSON.parse(prod['specificationGroups'][1]['specifications'][0]['values'].first)
+    sku_body = JSON.parse(prod['specificationGroups'][1]['specifications'][1]['values'].first)
+
+    item_size = measurement_body['unit_multiplier_un']
+    uom = measurement_body['measurement_unit_un']
+    product_pieces = measurement_body['unit_multiplier']
+
+    item_id = prod['items'][0]['itemId']
+    sku = sku_body["#{item_id}"]['ref_id']
+
+    available_qty = prod['items'][0]['sellers'][0]['commertialOffer']['AvailableQuantity']
+    if available_qty > 0
+        is_available = true
+    else
+        is_available = false
+    end
+    img_url = prod['items'][0]['images'][0]['imageUrl']
     category = categories.last.gsub('/','')
     sub_category_arr = categories[0].split('/')
     sub_category = []
@@ -12,52 +29,45 @@ products.each_with_index do |prod, i|
             sub_category.push(sub_cat)
         end
     end
-    # byebug
-    sub_category = sub_category.join('>')
+
+    sub_category = sub_category.join(' > ')
     
     url = 'https://www.disco.com.ar' + prod['link']
 
     out = {
+        '_collection' => 'items',
+        '_id' => prod['productId'],
         'competitor_name' => 'Disco',
-        'competitor_type' => 'Local_Store',
-        'store_name' => "Disco",
-        'store_id' => nil,
+        'competitor_type' => 'dmart',
+        'store_name' => "Disco Argantina",
+        'store_id' => '1',
         'country_iso' => 'AR',
         'language' => 'ENG',
         'currency_code_lc' => 'ARS',
         'scraped_at_timestamp' => Time.now().to_s.gsub(/([+]\S+)/, '').strip,
-        'competitor_product_id' => nil,
+        'competitor_product_id' => prod['productId'],
         'name' => prod['productName'],
         'brand' => prod['brand'],
         'category_id' => prod['categoryId'],
         'category' => category, #don't forget to change this category name
         'sub_category' => sub_category,
-        'customer_price_lc' => nil,
-        'base_price_lc' => nil,
-        'has_discount' => nil,
-        'discount_percentage' => nil,
         'rank_in_listing' => i + 1,
         'page_number'=> 1,
-        'product_pieces' => nil,
-        'size_std' => nil,
-        'size_unit_std' => nil,
+        'product_pieces' => product_pieces,
+        'size_std' => item_size,
+        'size_unit_std' => uom,
         'description' => prod['description'],
-        'img_url'=> nil,
-        'barcode'=> nil,
-        'sku'=> nil,
+        'img_url'=> img_url,
+        'sku'=> sku,
         'url'=> url,
-        'is_available' => nil,
+        'barcode' => prod['productId'],
+        'is_available' => is_available,
         'crawled_source'=>'WEB',
-        'is_promoted' => nil,
-        'type_of_promotion' => nil,
-        'promo_attributes'=> nil,
-        'is_private_label' => nil,
         'latitude' => nil,
         'longitude' => nil,
         'reviews' => nil,
         'store_reviews'=> nil,
-        'item_attributes'=> nil,
-        'item_identifiers'=> nil,
+        'item_identifiers'=> ({'barcode': "'#{prod['productId']}'"}).to_json,
         'country_of_origin'=> nil,
         'variants'=> nil,
     }
