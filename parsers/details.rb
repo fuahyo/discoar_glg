@@ -5,33 +5,36 @@ out = vars['out']
 script = html.css('script[type="application/ld+json"]')[0].text
 
 json = JSON.parse(script)
-
-if html.at('div.flex.flex-grow-1.w-100.flex-column .discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').nil?
+# require 'byebug'
+# byebug
+prod_detail = html.css('div div.vtex-flex-layout-0-x-flexRow')[1]
+flag = prod_detail.css('.discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text rescue nil
+# byebug
+if flag.empty?
     base_price_lc = json['offers']['highPrice']
     customer_price_lc = base_price_lc
     is_promoted = false
     has_discount = false
-elsif html.at('div.flex.flex-grow-1.w-100.flex-column .discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text.include?(/\d+do al.*/)
+elsif !flag.empty? && flag.include?("do al")
     has_discount = true
     is_promoted = true
     base_price_lc = json['offers']['highPrice']
     customer_price_lc = base_price_lc
     type_of_promotion = 'Banner'
     promo_attributes = {
-        "promo_detail": "'#{html.at('div.flex.flex-grow-1.w-100.flex-column .discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text}'"
+        "promo_detail": "'#{flag}'"
     }.to_json
-else
+elsif !flag.empty?
     has_discount = true
     is_promoted = true
     type_of_promotion = 'Banner'
     base_price_lc = json['offers']['highPrice']
-    string_percent = html.at('div.flex.flex-grow-1.w-100.flex-column .discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text.find(/.*(\d+)%/)
-    percent = $1
+    string_percent = flag.gsub('%','')
 
     customer_price_lc = (base_price_lc.to_f - (base_price_lc.to_f * percent.to_f)/100).to_s
     discount_percentage = ((percent.to_f).round(7)).to_s
     promo_attributes = {
-        "promo_detail": "'#{html.at('div.flex.flex-grow-1.w-100.flex-column .discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text}'"
+        "promo_detail": "'#{flag}'"
     }.to_json
 end
 
