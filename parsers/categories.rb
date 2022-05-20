@@ -1,8 +1,8 @@
 body = JSON.parse(content)
-
+vars = page['vars']
 body['data']['categoryChildren'].each do |cat|
     category = cat['name'].unicode_normalize(:nfkd).encode('ASCII', replace: '')
-    variables = JSON.parse('{"hideUnavailableItems":true,"skusFilter":"FIRST_AVAILABLE","simulationBehavior":"default","installmentCriteria":"MAX_WITHOUT_INTEREST","productOriginVtex":false,"map":"c,c","query":"electro/'+category.downcase.gsub(',','').gsub(' ','-')+'","orderBy":"OrderByScoreDESC","from":0,"to":20,"selectedFacets":[{"key":"c","value":"electro"},{"key":"c","value":"'+category.downcase.gsub(',','').gsub(' ','-')+'"}],"operator":"and","fuzzy":"0","searchState":null,"facetsBehavior":"Static","categoryTreeBehavior":"default","withFacets":false}')
+    variables = JSON.parse('{"hideUnavailableItems":true,"skusFilter":"FIRST_AVAILABLE","simulationBehavior":"default","installmentCriteria":"MAX_WITHOUT_INTEREST","productOriginVtex":false,"map":"c,c","query":"'+ vars['cat_name'] +'/'+category.downcase.gsub(',','').gsub(' ','-')+'","orderBy":"OrderByScoreDESC","from":0,"to":20,"selectedFacets":[{"key":"c","value":"'+ vars['cat_name'] +'"},{"key":"c","value":"'+category.downcase.gsub(',','').gsub(' ','-')+'"}],"operator":"and","fuzzy":"0","searchState":null,"facetsBehavior":"Static","categoryTreeBehavior":"default","withFacets":false}')
     # require 'byebug'
     # byebug
     encoded_variables = Base64.strict_encode64(JSON.generate(variables))

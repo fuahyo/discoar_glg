@@ -6,10 +6,19 @@ products.each_with_index do |prod, i|
     categories = prod['categories']
     measurement_body = ''
     sku_body = ''
+    country_origin = nil
     prod['specificationGroups'].each_with_index do |spec_body, j|
+        # require 'byebug'
+        # byebug
         if spec_body['name'] == 'Configuraciones'
             measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first)
             sku_body = JSON.parse(spec_body['specifications'][1]['values'].first)
+        elsif spec_body['name'] == 'Caracteristicas Generales'
+            spec_body['specifications'].each do |gen_spec|
+                if gen_spec['name'] == 'Origen'
+                    country_origin = gen_spec['values'][0]
+                end
+            end
         end
     end
     # byebug
@@ -45,7 +54,7 @@ products.each_with_index do |prod, i|
         '_id' => prod['productId'],
         'competitor_name' => 'Disco',
         'competitor_type' => 'dmart',
-        'store_name' => "Disco Argantina",
+        'store_name' => "Disco Argentina",
         'store_id' => '1',
         'country_iso' => 'AR',
         'language' => 'ENG',
@@ -74,7 +83,7 @@ products.each_with_index do |prod, i|
         'reviews' => nil,
         'store_reviews'=> nil,
         'item_identifiers'=> ({'barcode': "'#{prod['productId']}'"}).to_json,
-        'country_of_origin'=> nil,
+        'country_of_origin'=> country_origin,
         'variants'=> nil,
     }
     
