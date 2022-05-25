@@ -38,6 +38,12 @@ elsif !flag.empty?
     }.to_json
 end
 
+if out['country_of_origin'].nil?
+    if html.css('.vtex-product-specifications-1-x-specificationValue--last').last.attr('data-specification-name') == 'Origen'
+        country_origin = html.css('.vtex-product-specifications-1-x-specificationValue--last').last.attr('data-specification-value')
+    end
+end
+
 outputs << {
     'competitor_name' => nil,
     'competitor_type' => nil,
