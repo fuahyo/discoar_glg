@@ -7,7 +7,7 @@ script = html.css('script[type="application/ld+json"]')[0].text
 json = JSON.parse(script)
 # require 'byebug'
 # byebug
-prod_detail = html.css('div div.vtex-flex-layout-0-x-flexRow')[1]
+prod_detail = html.css('div div.vtex-flex-layout-0-x-flexRow .vtex-flex-layout-0-x-flexRow--mainRow-price-box')
 flag = prod_detail.css('.discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text rescue nil
 # byebug
 if flag.empty?
@@ -16,7 +16,7 @@ if flag.empty?
     is_promoted = false
     has_discount = false
 elsif !flag.empty? && flag.include?("do al")
-    has_discount = true
+    has_discount = false
     is_promoted = true
     base_price_lc = json['offers']['highPrice']
     customer_price_lc = base_price_lc
@@ -37,10 +37,13 @@ elsif !flag.empty?
         "promo_detail": "'#{flag}'"
     }.to_json
 end
-
+# require 'byebug'
+# byebug
 if out['country_of_origin'].nil?
-    if html.css('.vtex-product-specifications-1-x-specificationValue--last').last.attr('data-specification-name') == 'Origen'
-        country_origin = html.css('.vtex-product-specifications-1-x-specificationValue--last').last.attr('data-specification-value')
+    if !html.css('.vtex-product-specifications-1-x-specificationValue--last').last.nil?
+        if html.css('.vtex-product-specifications-1-x-specificationValue--last').last.attr('data-specification-name') == 'Origen'
+            country_origin = html.css('.vtex-product-specifications-1-x-specificationValue--last').last.attr('data-specification-value')
+        end
     end
 end
 
