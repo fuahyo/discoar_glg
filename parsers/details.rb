@@ -5,8 +5,7 @@ out = vars['out']
 script = html.css('script[type="application/ld+json"]')[0].text
 
 json = JSON.parse(script)
-# require 'byebug'
-# byebug
+
 prod_detail = html.css('div div.vtex-flex-layout-0-x-flexRow .vtex-flex-layout-0-x-flexRow--mainRow-price-box')
 flag = prod_detail.css('.discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text rescue nil
 # byebug
@@ -15,7 +14,7 @@ if flag.empty?
     customer_price_lc = base_price_lc
     is_promoted = false
     has_discount = false
-elsif !flag.empty? && flag.include?("do al")
+elsif !flag.empty? && flag.include?("do al") || !flag.include?('%') && flag.include?('x')
     has_discount = false
     is_promoted = true
     base_price_lc = json['offers']['highPrice']
@@ -29,10 +28,10 @@ elsif !flag.empty?
     is_promoted = true
     type_of_promotion = 'Banner'
     base_price_lc = json['offers']['highPrice']
-    string_percent = flag.gsub('%','')
+    string_percent = flag.scan(/(\d+)%.*/).first.first
 
-    customer_price_lc = (base_price_lc.to_f - (base_price_lc.to_f * percent.to_f)/100).to_s
-    discount_percentage = ((percent.to_f).round(7)).to_s
+    customer_price_lc = (base_price_lc.to_f - (base_price_lc.to_f * string_percent.to_f)/100).to_s
+    discount_percentage = ((string_percent.to_f).round(7)).to_s
     promo_attributes = {
         "promo_detail": "'#{flag}'"
     }.to_json
