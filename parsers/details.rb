@@ -8,6 +8,7 @@ json = JSON.parse(script)
 
 prod_detail = html.css('div div.vtex-flex-layout-0-x-flexRow .vtex-flex-layout-0-x-flexRow--mainRow-price-box')
 flag = prod_detail.css('.discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text rescue nil
+# require 'byebug'
 # byebug
 if flag.empty?
     base_price_lc = json['offers']['highPrice']
@@ -33,17 +34,21 @@ elsif !flag.empty?
     customer_price_lc = (base_price_lc.to_f - (base_price_lc.to_f * string_percent.to_f)/100).to_s
     discount_percentage = ((string_percent.to_f).round(7)).to_s
     promo_attributes = {
-        "promo_detail": "'#{flag}'"
+        "promo_detail": "'#{flag.scan(/(\d+%).*/).first.first}'"
     }.to_json
 end
 # require 'byebug'
 # byebug
+country_origin = ''
 if out['country_of_origin'].nil?
-    if !html.css('.vtex-product-specifications-1-x-specificationValue--last').last.nil?
-        if html.css('.vtex-product-specifications-1-x-specificationValue--last').last.attr('data-specification-name') == 'Origen'
-            country_origin = html.css('.vtex-product-specifications-1-x-specificationValue--last').last.attr('data-specification-value')
+    if !html.css('.vtex-product-specifications-1-x-specificationName').nil?
+        html.css('.vtex-product-specifications-1-x-specificationName').each_with_index do |specName,i|
+            if specName.text == "Origen"
+                country_origin = html.css('.vtex-product-specifications-1-x-specificationValue--last')[i].text
+            end
         end
     end
+    # byebug
 end
 
 outputs << {

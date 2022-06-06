@@ -22,6 +22,41 @@ products.each_with_index do |prod, i|
         end
     end
     # byebug
+    item_size = ''
+    uom = ''
+    
+    regexps = [
+        /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
+        /(\d*[\.,]?\d+)\s?([Oo][Zz])/,
+        /(\d*[\.,]?\d+)\s?([Ff][Oo])/,
+        /(\d*[\.,]?\d+)\s?([Ee][Aa])/,
+        /(\d*[\.,]?\d+)\s?([Ff][Zz])/,
+        /(\d*[\.,]?\d+)\s?(Fluid Ounces?)/,
+        /(\d*[\.,]?\d+)\s?([Oo]unce)/,
+        /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
+        /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
+        /(\d*[\.,]?\d+)\s?([Ll])/,
+        /(\d*[\.,]?\d+)\s?([Gg])/,
+        /(\d*[\.,]?\d+)\s?([Ll]itre)/,
+        /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
+        /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
+        /(\d*[\.,]?\d+)\s?([Cc]apsules)/,
+        /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
+        /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
+        /(\d*[\.,]?\d+)\s?([Cc]hews)/,
+        /(\d*[\.,]?\d+)\s?([Mm]illiliter)/i,
+        /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
+        /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
+        /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
+        /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
+        /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
+        /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
+        /(\d*[\.,]?\d+)\s?([Mm])/i,
+    ]
+    regexps.find {|regexp| prod['productName'].downcase =~ regexp}
+    item_size = $1
+    uom = $2
+
     item_size = measurement_body['unit_multiplier_un']
     uom = measurement_body['measurement_unit_un']
     product_pieces = measurement_body['unit_multiplier']
