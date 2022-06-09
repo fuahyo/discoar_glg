@@ -16,13 +16,15 @@ if flag.empty?
     is_promoted = false
     has_discount = false
 elsif !flag.empty? && flag.include?("do al") || !flag.include?('%') && flag.include?('x')
+    # require 'byebug'
+    # byebug
     has_discount = false
     is_promoted = true
     base_price_lc = json['offers']['highPrice']
     customer_price_lc = base_price_lc
     type_of_promotion = 'Banner'
     promo_attributes = {
-        "promo_detail": "'#{flag}'"
+        "promo_detail": "'#{flag.scan(/(\d+\s?do al \d+%).*/).first.first}'"
     }.to_json
 elsif !flag.empty?
     has_discount = true
@@ -44,7 +46,7 @@ if out['country_of_origin'].nil?
     if !html.css('.vtex-product-specifications-1-x-specificationName').nil?
         html.css('.vtex-product-specifications-1-x-specificationName').each_with_index do |specName,i|
             if specName.text == "Origen"
-                country_origin = html.css('.vtex-product-specifications-1-x-specificationValue--last')[i].text
+                out['country_of_origin'] = html.css('.vtex-product-specifications-1-x-specificationValue--last')[i].text
             end
         end
     end
@@ -64,7 +66,8 @@ regexps = [
     /(\d*[\.,]?\d+)\s?([Oo]unce)/,
     /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
     /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
-    /(\d*[\.,]?\d+)\s?([Ll])/,
+    # /(\d*[\.,]?\d+)\s?([Ll])/,
+    /(\d*[\.,]?\d+)\s?([Ll][Tt])/,
     /(\d*[\.,]?\d+)\s?([Gg])/,
     /(\d*[\.,]?\d+)\s?([Ll]itre)/,
     /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
@@ -80,11 +83,15 @@ regexps = [
     /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
     /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
     /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
-    /(\d*[\.,]?\d+)\s?([Mm])/i,
+    # /(\d*[\.,]?\d+)\s?([Mm])/i,
 ]
 regexps.find {|regexp| out['name'].downcase =~ regexp}
 item_size = $1
 uom = $2
+
+# require 'byebug'
+# byebug
+out['size_unit_std'] = uom
 outputs << {
     'competitor_name' => nil,
     'competitor_type' => nil,
@@ -119,7 +126,7 @@ outputs << {
     'is_promoted' => is_promoted,
     'type_of_promotion' => type_of_promotion,
     'promo_attributes'=> promo_attributes.nil? ? nil : promo_attributes,
-    'is_private_label' => false,
+    'is_private_label' => true,
     'latitude' => nil,
     'longitude' => nil,
     'reviews' => nil,
