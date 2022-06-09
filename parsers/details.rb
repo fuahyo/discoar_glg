@@ -23,9 +23,15 @@ elsif !flag.empty? && flag.include?("do al") || !flag.include?('%') && flag.incl
     base_price_lc = json['offers']['highPrice']
     customer_price_lc = base_price_lc
     type_of_promotion = 'Banner'
-    promo_attributes = {
-        "promo_detail": "'#{flag.scan(/(\d+\s?do al \d+%).*/).first.first}'"
-    }.to_json
+    if flag.include?("do al")
+        promo_attributes = {
+            "promo_detail": "'#{flag.scan(/(\d+\s?do al \d+%).*/).first.first}'"
+        }.to_json
+    elsif flag.include?("x")
+        promo_attributes = {
+            "promo_detail": "'#{flag.scan(/(\d+\s?x\s?\d+).*/).first.first}'"
+        }.to_json
+    end
 elsif !flag.empty?
     has_discount = true
     is_promoted = true
