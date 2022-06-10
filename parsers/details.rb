@@ -92,12 +92,12 @@ regexps = [
     # /(\d*[\.,]?\d+)\s?([Mm])/i,
 ]
 regexps.find {|regexp| out['name'].downcase =~ regexp}
-item_size = $1
-uom = $2
+out['size_std'] = $1
+out['size_unit_std'] = $2
 
 # require 'byebug'
 # byebug
-out['size_unit_std'] = uom
+# out['size_unit_std'] = uom
 outputs << {
     'competitor_name' => nil,
     'competitor_type' => nil,
@@ -120,8 +120,8 @@ outputs << {
     'rank_in_listing' => nil,
     'page_number'=> nil,
     'product_pieces' => nil,
-    'size_std' => item_size,
-    'size_unit_std' => uom,
+    'size_std' => nil,
+    'size_unit_std' => nil,
     'description' => nil,
     'img_url'=> nil,
     'barcode'=> nil,
