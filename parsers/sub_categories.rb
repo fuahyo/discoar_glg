@@ -25,7 +25,7 @@ products.each_with_index do |prod, i|
 
     item_size = measurement_body['unit_multiplier_un']
     uom = measurement_body['measurement_unit_un']
-    product_pieces = measurement_body['unit_multiplier']
+    # product_pieces = measurement_body['unit_multiplier']
 
     item_id = prod['items'][0]['itemId']
     sku = sku_body["#{item_id}"]['ref_id']
@@ -69,7 +69,7 @@ products.each_with_index do |prod, i|
         'sub_category' => sub_category,
         'rank_in_listing' => i + 1,
         'page_number'=> 1,
-        'product_pieces' => product_pieces,
+        'product_pieces' => nil,
         'size_std' => item_size,
         'size_unit_std' => uom,
         'description' => prod['description'],

@@ -62,6 +62,12 @@ end
 item_size = ''
 uom = ''
 
+if out['name'].include?('pack')
+    product_pieces = out['size_std']
+else
+    product_pieces = 1
+end
+
 regexps = [
     /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
     /(\d*[\.,]?\d+)\s?(lt)/,
@@ -119,7 +125,7 @@ outputs << {
     'discount_percentage' => discount_percentage,
     'rank_in_listing' => nil,
     'page_number'=> nil,
-    'product_pieces' => nil,
+    'product_pieces' => product_pieces,
     'size_std' => nil,
     'size_unit_std' => nil,
     'description' => nil,
