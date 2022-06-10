@@ -62,10 +62,10 @@ end
 item_size = ''
 uom = ''
 
-if out['name'].include?('pack')
-    product_pieces = out['size_std']
+if out['name'].include?('Six Pack') || out['name'].include?('Sixpack')
+    out['product_pieces'] = '6'
 else
-    product_pieces = 1
+    out['product_pieces'] = '1'
 end
 
 regexps = [
@@ -125,7 +125,7 @@ outputs << {
     'discount_percentage' => discount_percentage,
     'rank_in_listing' => nil,
     'page_number'=> nil,
-    'product_pieces' => product_pieces,
+    'product_pieces' => nil,
     'size_std' => nil,
     'size_unit_std' => nil,
     'description' => nil,
