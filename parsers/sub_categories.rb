@@ -1,7 +1,9 @@
+# content_clean = content.gsub(/[Xx][Xx][Gg]/, '')
 body = JSON.parse(content)
-# require 'byebug'
+body_json = JSON.parse(body.to_json)
 
-products = body['data']['productSearch']['products']
+products = body_json['data']['productSearch']['products']
+# require 'byebug'
 products.each_with_index do |prod, i|
     categories = prod['categories']
     measurement_body = ''
@@ -12,23 +14,17 @@ products.each_with_index do |prod, i|
         # byebug
         if spec_body['name'] == 'Configuraciones'
             measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first)
-            sku_body = JSON.parse(spec_body['specifications'][1]['values'].first)
-        elsif spec_body['name'] == 'Caracteristicas Generales'
-            spec_body['specifications'].each do |gen_spec|
-                if gen_spec['name'] == 'Origen'
-                    country_origin = gen_spec['values'][0]
-                end
-            end
+            sku_body = JSON.parse((spec_body['specifications'][1]['values'].first).to_json)
         end
     end
     # byebug
 
-    item_size = measurement_body['unit_multiplier_un']
-    uom = measurement_body['measurement_unit_un']
+    # item_size = measurement_body['unit_multiplier_un']
+    # uom = measurement_body['measurement_unit_un']
     # product_pieces = measurement_body['unit_multiplier']
 
     item_id = prod['items'][0]['itemId']
-    sku = sku_body["#{item_id}"]['ref_id']
+    sku = sku_body["#{item_id}"]['ref_id'] rescue nil
 
     available_qty = prod['items'][0]['sellers'][0]['commertialOffer']['AvailableQuantity']
     if available_qty > 0
@@ -36,7 +32,7 @@ products.each_with_index do |prod, i|
     else
         is_available = false
     end
-    img_url = prod['items'][0]['images'][0]['imageUrl']
+    img_url = prod['items'][0]['images'][0]['imageUrl'].downcase
     category = categories.last.gsub('/','')
     sub_category_arr = categories[0].split('/')
     sub_category = []
@@ -48,7 +44,7 @@ products.each_with_index do |prod, i|
 
     sub_category = sub_category.join(' > ')
     
-    url = 'https://www.disco.com.ar' + prod['link']
+    url = 'https://www.disco.com.ar' + prod['link'].downcase
     # byebug
     out = {
         '_collection' => 'items',
@@ -62,7 +58,7 @@ products.each_with_index do |prod, i|
         'currency_code_lc' => 'ARS',
         'scraped_at_timestamp' => Time.now().to_s.gsub(/([+]\S+)/, '').strip,
         'competitor_product_id' => prod['productId'],
-        'name' => prod['productName'],
+        'name' => prod['productName'].downcase,
         'brand' => prod['brand'],
         'category_id' => prod['categoryId'],
         'category' => category, #don't forget to change this category name
@@ -70,11 +66,11 @@ products.each_with_index do |prod, i|
         'rank_in_listing' => i + 1,
         'page_number'=> 1,
         'product_pieces' => nil,
-        'size_std' => item_size,
-        'size_unit_std' => uom,
-        'description' => prod['description'],
+        'size_std' => nil,
+        'size_unit_std' => nil,
+        'description' => prod['description'].downcase,
         'img_url'=> img_url,
-        'sku'=> sku,
+        'sku'=> nil,
         'url'=> url,
         'barcode' => prod['productId'],
         'is_available' => is_available,
