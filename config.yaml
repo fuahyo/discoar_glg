@@ -4,7 +4,7 @@ seeder:
 parsers:
   - page_type: sub_categories
     file: ./parsers/sub_categories.rb
-    disabled: true
+    disabled: false
   - page_type: categories
     file: ./parsers/categories.rb
     disabled: false
