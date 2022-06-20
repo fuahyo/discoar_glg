@@ -1,9 +1,9 @@
-# content_clean = content.gsub(/[Xx][Xx][Gg]/, '')
 body = JSON.parse(content)
 body_json = JSON.parse(body.to_json)
+vars = page['vars']
 
 products = body_json['data']['productSearch']['products']
-# require 'byebug'
+# require 'byebug'test
 products.each_with_index do |prod, i|
     categories = prod['categories']
     measurement_body = ''
@@ -17,11 +17,6 @@ products.each_with_index do |prod, i|
             sku_body = JSON.parse((spec_body['specifications'][1]['values'].first).to_json)
         end
     end
-    # byebug
-
-    # item_size = measurement_body['unit_multiplier_un']
-    # uom = measurement_body['measurement_unit_un']
-    # product_pieces = measurement_body['unit_multiplier']
 
     item_id = prod['items'][0]['itemId']
     sku = sku_body["#{item_id}"]['ref_id'] rescue nil
@@ -93,6 +88,32 @@ products.each_with_index do |prod, i|
         headers: page['headers'],
         vars: {
             out: out,
+        },
+    }
+end
+
+totalProd = body_json['data']['productSearch']['recordsFiltered']
+lastPage = (totalProd.to_f/20).ceil()
+
+if vars['page_num'] < lastPage
+    start_count = vars['page_num'] * 20
+    last_count = start_count - 1
+    variable = JSON.parse('{"hideUnavailableItems":true,"skusFilter":"FIRST_AVAILABLE","simulationBehavior":"default","installmentCriteria":"MAX_WITHOUT_INTEREST","productOriginVtex":false,"map":"c,c","query":"'+ vars['cat_name'] +'/'+ vars['category'] +'","orderBy":"OrderByScoreDESC","from":"'+ start_count +'","to":"'+ last_count +'","selectedFacets":[{"key":"c","value":"'+ vars['cat_name'] +'"},{"key":"c","value":"'+ vars['category'] +'"}],"operator":"and","fuzzy":"0","searchState":null,"facetsBehavior":"Static","categoryTreeBehavior":"default","withFacets":false}')
+
+    encoded_variables = Base64.strict_encode64(JSON.generate(variables))
+    url = 'https://www.disco.com.ar/_v/segment/graphql/v1?workspace=master&maxAge=short&appsEtag=remove&domain=store&locale=es-AR&__bindingId=0beab475-23b8-4674-b38a-956cc988dade&operationName=productSearchV3&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"9d26b45522afdbdaf6834a862c99345a6d8325c10f609c2de7cb6d9d34f2fbe4","sender":"vtex.store-resources@0.x","provider":"vtex.search-graphql@0.x"},"variables":"'+encoded_variables+'"}'
+
+    pages << {
+        url: url,
+        page_type: "sub_categories",
+        http2: true,
+        method: "GET",
+        headers: page['headers'],
+        vars: {
+            url_variables: variables,
+            cat_name: vars['cat_name'],
+            category: category.downcase.gsub(',','').gsub(' ','-'),
+            page_num: vars['page_num'] + 1,
         },
     }
 end

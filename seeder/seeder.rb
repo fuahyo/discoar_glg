@@ -2,8 +2,8 @@
 url = "https://www.disco.com.ar/_v/private/graphql/v1?workspace=master&maxAge=long&appsEtag=remove&domain=store&locale=es-AR&__bindingId=0beab475-23b8-4674-b38a-956cc988dade"
 # method: 'POST',
 # body: '{"operationName":"categoryChildren","variables":{},"extensions":{"persistedQuery":{"version":1,"sha256Hash":"3630a63bf8c6e85633d2eec9b120514b860c329a6b884a9240b5740aee65040b","sender":"discoargentina.store-theme@4.x","provider":"vtex.catalog-graphql@1.x"},"variables":"eyJpZCI6IjE1In0="}}'
-id_list = ['eyJpZCI6IjE1In0=', 'eyJpZCI6IjIifQ==', 'eyJpZCI6IjQ2NSJ9', 'eyJpZCI6IjEifQ==', 'eyJpZCI6IjQifQ==', 'eyJpZCI6IjMifQ==', 'eyJpZCI6IjcifQ==', 'eyJpZCI6IjExIn0=', 'eyJpZCI6IjQ1NyJ9', 'eyJpZCI6IjEzIn0=']
-cat_name = ['electro', 'bebidas', 'tiempo libre', 'almacen', 'carnes', 'frutas y verduras', 'lacteos', 'perfumeria', 'bebes y ninos', 'limpieza']
+id_list = ['eyJpZCI6IjE1In0=', 'eyJpZCI6IjIifQ==', 'eyJpZCI6IjQ2NSJ9', 'eyJpZCI6IjEifQ==', 'eyJpZCI6IjQifQ==', 'eyJpZCI6IjMifQ==', 'eyJpZCI6IjcifQ==', 'eyJpZCI6IjExIn0=', 'eyJpZCI6IjQ1NyJ9', 'eyJpZCI6IjEzIn0=', 'eyJpZCI6IjYifQ==', 'eyJpZCI6IjgifQ==', 'eyJpZCI6IjkifQ==', 'eyJpZCI6IjEwIn0=', 'eyJpZCI6IjE0In0=', 'eyJpZCI6IjE2In0=']
+cat_name = ['electro', 'bebidas', 'tiempo libre', 'almacen', 'carnes', 'frutas y verduras', 'lacteos', 'perfumeria', 'bebes y ninos', 'limpieza', 'quesos y fiambres', 'congelados', 'panaderia y reposteria', 'comidas preparadas', 'mascotas', 'hogar y textil']
 
 id_list.each_with_index do |id, i|
     pages << {
