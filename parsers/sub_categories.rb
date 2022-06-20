@@ -94,12 +94,13 @@ end
 
 totalProd = body_json['data']['productSearch']['recordsFiltered']
 lastPage = (totalProd.to_f/20).ceil()
-
+# require 'byebug'
+# byebug
+start_count = (vars['page_num'].to_i * 20).to_s
+last_count = (start_count.to_i + vars['page_num'].to_i * 20 - 1).to_s
+# byebug
 if vars['page_num'] < lastPage
-    start_count = vars['page_num'] * 20
-    last_count = start_count - 1
-    variable = JSON.parse('{"hideUnavailableItems":true,"skusFilter":"FIRST_AVAILABLE","simulationBehavior":"default","installmentCriteria":"MAX_WITHOUT_INTEREST","productOriginVtex":false,"map":"c,c","query":"'+ vars['cat_name'] +'/'+ vars['category'] +'","orderBy":"OrderByScoreDESC","from":"'+ start_count +'","to":"'+ last_count +'","selectedFacets":[{"key":"c","value":"'+ vars['cat_name'] +'"},{"key":"c","value":"'+ vars['category'] +'"}],"operator":"and","fuzzy":"0","searchState":null,"facetsBehavior":"Static","categoryTreeBehavior":"default","withFacets":false}')
-
+    variables = JSON.parse('{"hideUnavailableItems":true,"skusFilter":"FIRST_AVAILABLE","simulationBehavior":"default","installmentCriteria":"MAX_WITHOUT_INTEREST","productOriginVtex":false,"map":"c,c","query":"'+ vars['cat_name'] +'/'+ vars['category'] +'","orderBy":"OrderByScoreDESC","from":"'+ start_count +'","to":"'+ last_count +'","selectedFacets":[{"key":"c","value":"'+ vars['cat_name'] +'"},{"key":"c","value":"'+ vars['category'] +'"}],"operator":"and","fuzzy":"0","searchState":null,"facetsBehavior":"Static","categoryTreeBehavior":"default","withFacets":false}')
     encoded_variables = Base64.strict_encode64(JSON.generate(variables))
     url = 'https://www.disco.com.ar/_v/segment/graphql/v1?workspace=master&maxAge=short&appsEtag=remove&domain=store&locale=es-AR&__bindingId=0beab475-23b8-4674-b38a-956cc988dade&operationName=productSearchV3&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"6869499be99f20964918e2fe0d1166fdf6c006b1766085db9e5a6bc7c4b957e5","sender":"vtex.store-resources@0.x","provider":"vtex.search-graphql@0.x"},"variables":"'+encoded_variables+'"}'
 
@@ -112,7 +113,7 @@ if vars['page_num'] < lastPage
         vars: {
             url_variables: variables,
             cat_name: vars['cat_name'],
-            category: category.downcase.gsub(',','').gsub(' ','-'),
+            category: vars['category'],
             page_num: vars['page_num'] + 1,
         },
     }
