@@ -8,8 +8,11 @@ json = JSON.parse(script)
 
 prod_detail = html.css('div div.vtex-flex-layout-0-x-flexRow .vtex-flex-layout-0-x-flexRow--mainRow-price-box')
 flag = prod_detail.css('.discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text rescue nil
-# require 'byebug'
-# byebug
+if flag.include?('x') && flag.include?('%')
+    flag = flag.scan(/(\d+\s?x\s?\d?).*/).first.first
+end
+require 'byebug'
+byebug
 if flag.empty?
     base_price_lc = json['offers']['highPrice']
     customer_price_lc = base_price_lc
@@ -79,8 +82,8 @@ regexps = [
     /(\d*[\.,]?\d+)\s?([Oo]unce)/,
     /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
     /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
-    /(\d*[\.,]?\d+)\s?([Ll])/,
-    /(\d*[\.,]?\d+)\s?([Gg])/,
+    /(\d*[\.,]?\d+)\s?([Ll]\z)/,
+    /(\d*[\.,]?\d+)\s?([Gg]\z)/,
     /(\d*[\.,]?\d+)\s?([Ll]itre)/,
     /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
     /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
@@ -90,10 +93,10 @@ regexps = [
     /(\d*[\.,]?\d+)\s?([Cc]hews)/,
     /(\d*[\.,]?\d+)\s?([Mm]illiliter)/i,
     /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
-    /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
-    /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
-    /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
-    /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
+    /(\d*[\.,]?\d+)\s?([Kk][Gg]\z)/i,
+    /(\d*[\.,]?\d+)\s?([Cc][Cc]\z)/i,
+    /(\d*[\.,]?\d+)\s?([Mm][Tt]\z)/i,
+    /(\d*[\.,]?\d+)\s?([Cc][Mm]\z)/i,
     /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
     # /(\d*[\.,]?\d+)\s?([Mm])/i,
 ]
