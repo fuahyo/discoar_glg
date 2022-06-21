@@ -116,11 +116,16 @@ regexps = [
     # /(\d*[\.,]?\d+)\s?([Mm])/i,
 ]
 regexps.find {|regexp| out['name'].downcase =~ regexp}
-out['size_std'] = $1.gsub(',','.')
+out['size_std'] = $1
 out['size_unit_std'] = $2
 
-# require 'byebug'
-# byebug
+unless out['size_std'].nil?
+    out['size_std'] = out['size_std'].gsub(',','.')
+end
+
+sku = html.css('.vtex-product-identifier-0-x-product-identifier--productReference .vtex-product-identifier-0-x-product-identifier__value').text
+out['sku'] = sku rescue nil
+
 # out['size_unit_std'] = uom
 outputs << {
     'competitor_name' => nil,
