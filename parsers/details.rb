@@ -85,6 +85,7 @@ product_pieces_regex = [
     /(\d+)\s?tabletas/i,
 ].find {|ppr| out['name'].downcase =~ ppr}
 out['product_pieces'] = $1
+out['product_pieces'] = '1' if out['product_pieces'].nil?
 
 regexps = [
     /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
@@ -99,6 +100,7 @@ regexps = [
     /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
     /(\d*[\.,]?\d+)\s?([Ll]\z)/,
     /(\d*[\.,]?\d+)\s?([Gg]\z)/,
+    /(\d*[\.,]?\d+)\s?([Gg][Rr])/,
     /(\d*[\.,]?\d+)\s?([Ll]itre)/,
     /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
     /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
