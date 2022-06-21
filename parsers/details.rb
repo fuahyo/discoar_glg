@@ -71,6 +71,21 @@ else
     out['product_pieces'] = '1'
 end
 
+product_pieces_regex = [
+    /(\d+)\s?per\s?pack/i,
+    /(\d+)\s?pack/i,
+    /(\d+)\s?pcs?/i,
+    /(\d+)\s?unidades?/i,
+    /(\d+)\s?und?/i,
+    /(\d+)\s?un?/i,
+    /(\d+)\s?unid?/i,
+    /(\d+)\s?uds?/i,
+    /(\d+)\s?sobres/i,
+    /(\d+)\s?paq/i,
+    /(\d+)\s?tabletas/i,
+].find {|ppr| out['name'].downcase =~ ppr}
+out['product_pieces'] = $1
+
 regexps = [
     /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
     /(\d*[\.,]?\d+)\s?(lt)/,
@@ -101,7 +116,7 @@ regexps = [
     # /(\d*[\.,]?\d+)\s?([Mm])/i,
 ]
 regexps.find {|regexp| out['name'].downcase =~ regexp}
-out['size_std'] = $1
+out['size_std'] = $1.gsub(',','.')
 out['size_unit_std'] = $2
 
 # require 'byebug'
