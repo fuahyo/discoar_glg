@@ -13,8 +13,12 @@ products.each_with_index do |prod, i|
         # require 'byebug'
         # byebug
         if spec_body['name'] == 'Configuraciones'
-            measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first)
-            sku_body = JSON.parse((spec_body['specifications'][1]['values'].first).to_json)
+            if i == 1
+                measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first)
+                sku_body = JSON.parse((spec_body['specifications'][1]['values'].first).to_json)
+            else
+                sku_body = JSON.parse((spec_body['specifications'][0]['values'].first).to_json)
+            end
         end
     end
 
