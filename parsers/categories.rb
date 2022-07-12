@@ -6,7 +6,7 @@ body['data']['categoryChildren'].each do |cat|
     # require 'byebug'
     # byebug
     encoded_variables = Base64.strict_encode64(JSON.generate(variables))
-    url = 'https://www.disco.com.ar/_v/segment/graphql/v1?workspace=master&maxAge=short&appsEtag=remove&domain=store&locale=es-AR&__bindingId=0beab475-23b8-4674-b38a-956cc988dade&operationName=productSearchV3&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"6869499be99f20964918e2fe0d1166fdf6c006b1766085db9e5a6bc7c4b957e5","sender":"vtex.store-resources@0.x","provider":"vtex.search-graphql@0.x"},"variables":"'+encoded_variables+'"}'
+    url = 'https://www.disco.com.ar/_v/segment/graphql/v1?workspace=master&maxAge=short&appsEtag=remove&domain=store&locale=es-AR&__bindingId=0beab475-23b8-4674-b38a-956cc988dade&operationName=productSearchV3&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"0614346b029d7dde7d37a7a1910427eb10f028814d3c177500eb15111d4d4019","sender":"vtex.store-resources@0.x","provider":"vtex.search-graphql@0.x"},"variables":"'+encoded_variables+'"}'
 
     pages << {
         url: url,
