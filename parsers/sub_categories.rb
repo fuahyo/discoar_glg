@@ -9,11 +9,11 @@ products.each_with_index do |prod, i|
     measurement_body = ''
     sku_body = ''
     country_origin = nil
-    prod['specificationGroups'].each_with_index do |spec_body, j|
+    prod['specificationGroups'].each_with_index do |spec_body, idx|
         # require 'byebug'
         # byebug
         if spec_body['name'] == 'Configuraciones'
-            if i == 1
+            if idx == 1
                 measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first)
                 sku_body = JSON.parse((spec_body['specifications'][1]['values'].first).to_json)
             else
