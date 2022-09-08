@@ -14,6 +14,9 @@ parsers:
   - page_type: details
     file: ./parsers/details.rb
     disabled: false
+  - page_type: brand_search
+    file: ./parsers/brand_search.rb
+    disabled: false
 exporters:
   - exporter_name: products_json
     exporter_type: json
