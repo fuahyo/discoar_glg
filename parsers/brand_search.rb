@@ -118,7 +118,7 @@ if vars['page_num'] < lastPage
             url_variables: variables,
             cat_name: vars['cat_name'],
             category: vars['category'],
-            brand: out['brand'],
+            brand: vars['brand'],
             page_num: vars['page_num'] + 1,
         },
     }

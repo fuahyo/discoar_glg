@@ -210,7 +210,7 @@ else
                 url_variables: variables,
                 cat_name: vars['cat_name'],
                 brand: out['brand'],
-                category: category.downcase.gsub(',','').gsub(' ','-'),
+                category: out['category'],
                 page_num: 1,
             },
         }
