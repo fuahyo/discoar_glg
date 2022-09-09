@@ -1,6 +1,7 @@
 body = JSON.parse(content)
 body_json = JSON.parse(body.to_json)
 vars = page['vars']
+out = vars['out']
 
 products = body_json['data']['productSearch']['products']
 # require 'byebug'test
