@@ -16,7 +16,7 @@ products.each_with_index do |prod, i|
         if spec_body['name'] == 'Configuraciones'
             if idx == 1
                 measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first)
-                sku_body = JSON.parse((spec_body['specifications'][1]['values'].first).to_json)
+                sku_body = JSON.parse((spec_body['specifications'][1]['values'].first).to_json) rescue nil
             else
                 sku_body = JSON.parse((spec_body['specifications'][0]['values'].first).to_json)
             end
