@@ -61,12 +61,12 @@ else
         is_promoted = true
         type_of_promotion = 'Banner'
         base_price_lc = json['offers']['highPrice']
-        string_percent = flag.scan(/(\d+)%.*/).first.first
+        string_percent = flag.scan(/(\d+)%.*/).first.first rescue nil
 
         customer_price_lc = (base_price_lc.to_f - (base_price_lc.to_f * string_percent.to_f)/100).to_s
         discount_percentage = ((string_percent.to_f).round(7)).to_s
         promo_attributes = {
-            "promo_detail": "'#{flag.scan(/(\d+%).*/).first.first}'"
+            "promo_detail": "'#{string_percent}'"
         }.to_json
     end
     # require 'byebug'
