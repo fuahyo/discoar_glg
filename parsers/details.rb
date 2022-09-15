@@ -66,7 +66,7 @@ else
         customer_price_lc = (base_price_lc.to_f - (base_price_lc.to_f * string_percent.to_f)/100).to_s
         discount_percentage = ((string_percent.to_f).round(7)).to_s
         promo_attributes = {
-            "promo_detail": "'#{string_percent}'"
+            "promo_detail": "'#{string_percent}%'"
         }.to_json
     end
     # require 'byebug'
@@ -147,7 +147,9 @@ else
     end
 
     sku = html.css('.vtex-product-identifier-0-x-product-identifier--productReference .vtex-product-identifier-0-x-product-identifier__value').text
+    sku = content.scan(/\d\d\d\d\d\d\d\d\d\d\d/).uniq[1] if sku.empty?
     out['sku'] = sku rescue nil
+    
     # require 'byebug'
     # byebug
     # out['size_unit_std'] = uom
