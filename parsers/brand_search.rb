@@ -99,11 +99,10 @@ end
 
 totalProd = body_json['data']['productSearch']['recordsFiltered']
 lastPage = (totalProd.to_f/20).ceil()
-# require 'byebug'
-# byebug
+
 start_count = (vars['page_num'].to_i * 20).to_s
 last_count = (start_count.to_i + vars['page_num'].to_i * 20 - 1).to_s
-# byebug
+
 if vars['page_num'] < lastPage
     variables = JSON.parse('{"hideUnavailableItems":true,"skusFilter":"FIRST_AVAILABLE","simulationBehavior":"default","installmentCriteria":"MAX_WITHOUT_INTEREST","productOriginVtex":false,"map":"ft","query":"'+ out['brand'] +'","orderBy":"OrderByScoreDESC","from":'+ start_count +',"to":'+ last_count +',"selectedFacets":[{"key":"ft","value":"'+ out['brand'] +'"}],"fullText":"'+ out['brand'] +'","operator":"and","fuzzy":"0","searchState":null,"facetsBehavior":"Static","categoryTreeBehavior":"default","withFacets":false}')
     encoded_variables = Base64.strict_encode64(JSON.generate(variables))

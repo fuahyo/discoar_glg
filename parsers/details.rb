@@ -148,7 +148,8 @@ else
 
     sku = html.css('.vtex-product-identifier-0-x-product-identifier--productReference .vtex-product-identifier-0-x-product-identifier__value').text
     out['sku'] = sku rescue nil
-
+    # require 'byebug'
+    # byebug
     # out['size_unit_std'] = uom
     outputs << {
         'competitor_name' => nil,
