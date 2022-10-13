@@ -3,7 +3,8 @@ body_json = JSON.parse(body.to_json)
 vars = page['vars']
 
 products = body_json['data']['productSearch']['products']
-# require 'byebug'test
+# require 'byebug'
+# byebug
 products.each_with_index do |prod, i|
     categories = prod['categories']
     measurement_body = ''
@@ -14,7 +15,7 @@ products.each_with_index do |prod, i|
         # byebug
         if spec_body['name'] == 'Configuraciones'
             if idx == 1
-                measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first)
+                measurement_body = JSON.parse(spec_body['specifications'][0]['values'].first) rescue nil
                 sku_body = JSON.parse((spec_body['specifications'][1]['values'].first).to_json) rescue nil
             else
                 sku_body = JSON.parse((spec_body['specifications'][0]['values'].first).to_json)
