@@ -68,8 +68,8 @@ else
             "promo_detail": "'#{string_percent}%'"
         }.to_json
     end
-    # require 'byebug'
-    # byebug
+    require 'byebug'
+    byebug
     country_origin = ''
     if out['country_of_origin'].nil?
         if !html.css('.vtex-product-specifications-1-x-specificationName').nil?
