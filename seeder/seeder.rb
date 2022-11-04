@@ -10,7 +10,7 @@ id_list.each_with_index do |id, i|
         url: url,
         method: 'POST',
         page_type: 'categories',
-        body: '{"operationName":"categoryChildren","variables":{},"extensions":{"persistedQuery":{"version":1,"sha256Hash":"245f0894317786da847ab80c034cff8ed4e66bdace09cb7fa7c4d9efc486245b","sender":"discoargentina.store-theme@4.x","provider":"vtex.catalog-graphql@1.x"},"variables":"'+ id +'"}}',
+        body: '{"operationName":"categoryChildren","variables":{},"extensions":{"persistedQuery":{"version":1,"sha256Hash":"b41f47a79682f767c777d088118c65257856fc3144faf0c8d883b66ce22e063e","sender":"discoargentina.store-theme@4.x","provider":"vtex.catalog-graphql@1.x"},"variables":"'+ id +'"}}',
         headers: {
             'Accept' => '*/*',
             'Accept-Encoding' => 'gzip, deflate, br',
