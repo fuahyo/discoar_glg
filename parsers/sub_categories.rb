@@ -90,7 +90,7 @@ products.each_with_index do |prod, i|
         http2: true,
         fetch_type: 'browser',
         method: "GET",
-        cookie: page['headers']["cookie"],
+        # cookie: page['headers']["cookie"],
         headers: page['headers'],
         vars: {
             out: out,
