@@ -87,7 +87,7 @@ products.each_with_index do |prod, i|
     pages << {
         url: url,
         page_type: "details",
-        http2: false,
+        http2: trueß,
         fetch_type: 'browser',
         method: "GET",
         # cookie: page['headers']["cookie"],
