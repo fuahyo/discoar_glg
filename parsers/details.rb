@@ -26,7 +26,7 @@ else
     script = html.css('script[type="application/ld+json"]')[0].text
 
     json = JSON.parse(script)
-
+    # html.css('.vtex-flex-layout-0-x-flexColChild.vtex-flex-layout-0-x-flexColChild--separator.vtex-flex-layout-0-x-flexColChild--product-box.pb0').text
     prod_detail = html.css('div div.vtex-flex-layout-0-x-flexRow .vtex-flex-layout-0-x-flexRow--mainRow-price-box')
     flag = prod_detail.css('.discoargentina-store-theme-WkYYQ7ZTERgAVs_fNdXNH').text rescue nil
     if flag.include?('x') && flag.include?('%')
@@ -148,8 +148,6 @@ else
     sku = content.scan(/\d\d\d\d\d\d\d\d\d\d\d/).uniq[1] if sku.empty?
     out['sku'] = sku rescue nil
     
-    # require 'byebug'
-    # byebug
     # out['size_unit_std'] = uom
     outputs << {
         'competitor_name' => nil,
