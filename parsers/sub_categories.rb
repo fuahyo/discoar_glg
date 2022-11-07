@@ -90,12 +90,14 @@ products.each_with_index do |prod, i|
         http2: true,
         fetch_type: 'browser',
         method: "GET",
-        # cookie: page['headers']["cookie"],
+        cookie: page['headers']["cookie"],
         headers: page['headers'],
         vars: {
             out: out,
         },
     }
+
+    save_outputs outputs if outputs.length > 99
 end
 
 totalProd = body_json['data']['productSearch']['recordsFiltered']
