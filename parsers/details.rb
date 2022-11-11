@@ -33,6 +33,8 @@ else
         flag = flag.scan(/(\d+\s?x\s?\d?).*/).first.first
     end
 
+    require 'byebug'
+    byebug
     if flag.empty?
         base_price_lc = json['offers']['highPrice']
         customer_price_lc = base_price_lc
