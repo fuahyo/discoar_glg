@@ -27,7 +27,7 @@ cat_name = ['electro', 'bebidas', 'tiempo libre', 'almacen', 'carnes', 'frutas y
 pages << {
     url: "https://www.disco.com.ar/cafe-instantaneo-nescafe-gold-x-100-gr/p",
     page_type: "details",
-    http2: true,
+    http2: false,
     fetch_type: 'browser',
     method: "GET",
     driver: {
