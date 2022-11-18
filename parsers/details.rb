@@ -1,6 +1,6 @@
 html = Nokogiri::HTML(content)
 # vars = page['vars']
-# out = vars['out']
+out = vars['out']
 
 if content.include? 'PAGE NOT FOUND'
     total_refetch = (vars["total_refetch"].nil?) ? 1 : vars["total_refetch"] + 1
