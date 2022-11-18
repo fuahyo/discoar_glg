@@ -32,7 +32,7 @@ pages << {
     fetch_type: 'browser',
     method: "GET",
     driver: {
-        "code": "await sleep(4000);",
+        "code": "await sleep(10000);",
         "goto_options": {
             "timeout": 0,
             "waitUntil": "domcontentloaded",
