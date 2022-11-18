@@ -46,7 +46,5 @@ pages << {
         'if-none-match' => "ECFCF3D4AF9A667FE0333AE5B7588AE7",
         'User-Agent' => 'Mozilla/5.0 (Macitosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
     }
-    vars: {
-        out: out,
-    },
+
 }
