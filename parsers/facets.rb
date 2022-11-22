@@ -6,10 +6,10 @@ def jp(text)
     puts JSON.pretty_generate(text)
 end
 
-is_full_run = false
-if ENV['is_full_run'] == 'true' 
-    is_full_run = true
-end
+# is_full_run = false
+# if ENV['is_full_run'] == 'true' 
+#     is_full_run = true
+# end
 
 # region_id = ENV['region_id']
 # if !region_id
