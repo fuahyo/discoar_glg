@@ -21,7 +21,7 @@ module Helpers
     end
     
     def self.website
-        'https://www.superxtra.com'
+        'https://www.disco.com.ar'
     end
 
 

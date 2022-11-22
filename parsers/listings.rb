@@ -116,7 +116,7 @@ if count <= 1000 || using_brand_filter
         base_price_lc = Float(item['sellers'].first['commertialOffer']['ListPrice'])
         customer_price_lc = Float(item['sellers'].first['commertialOffer']['Price'])
 
-        store_id = item['sellers'].first['sellerId']
+        store_id = "1"#item['sellers'].first['sellerId']
 
         base_price_lc = customer_price_lc if base_price_lc < customer_price_lc
         base_price_lc = customer_price_lc if base_price_lc == 0
@@ -236,8 +236,8 @@ if count <= 1000 || using_brand_filter
         is_private_label = (brand =~ /disco/i) ? false : true
         is_private_label = false if brand.nil? || brand&.empty?
 
-        lat = 8.9913002
-        long = -79.5211498
+        lat = nil
+        long = nil
 
         attributes = []
         specs = product['specificationGroups'].select{|spec| spec['originalName'] == 'allSpecifications'}.first['specifications']
@@ -256,17 +256,17 @@ if count <= 1000 || using_brand_filter
 
         item_identifiers = (barcode.nil? || barcode&.empty?) ? nil : {barcode:"'#{barcode}'"}.to_json
 
-        country_of_origin = specs.select{|spec| spec['originalName'].include?('País de Origen')}.first['values'].first rescue nil
+        country_of_origin = nil #specs.select{|spec| spec['originalName'].include?('País de Origen')}.first['values'].first rescue nil
 
         outputs << {
             _collection: "items",
             _id: id,
             competitor_name: "DISCO",
             competitor_type: "dmart",
-            store_name: "DISCO",
+            store_name: "Disco Argentina",
             store_id: store_id,
             country_iso: "AR",
-            language: "SPA",
+            language: "ENG",
             currency_code_lc: "ARS",
             scraped_at_timestamp: Time.now.strftime("%F %H:%M:%S"),
             competitor_product_id: id,
