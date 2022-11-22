@@ -219,12 +219,13 @@ if count <= 1000 || using_brand_filter
             promo_detail << "-#{(discount_percentage).round}%"
         end
 
-        promo_list = ["Promo PGC"]
-        product['clusterHighlights']&.each do |highlight|
-            # if highlight['name'] == "Promo PGC"
-            promo_detail << highlight['name']
-            # end
-        end
+        # product['clusterHighlights']&.each do |highlight|
+        #     # if highlight['name'] == "Promo PGC"
+        #     promo_detail << highlight['name']
+        #     # end
+        # end
+        
+        # 6x5 en leches UAT seleccionadas
         
         promo_attributes = nil
         if !promo_detail.empty?
@@ -252,13 +253,13 @@ if count <= 1000 || using_brand_filter
             end
         end
 
-        item_attributes = attributes.empty? ? nil : "{\"item attributes\":\"#{attributes.map{|a| "'#{a}'"}.join(",")}\"}"
+        item_attributes = nil #attributes.empty? ? nil : "{\"item attributes\":\"#{attributes.map{|a| "'#{a}'"}.join(",")}\"}"
 
         item_identifiers = (barcode.nil? || barcode&.empty?) ? nil : {barcode:"'#{barcode}'"}.to_json
 
         country_of_origin = nil #specs.select{|spec| spec['originalName'].include?('País de Origen')}.first['values'].first rescue nil
 
-        outputs << {
+        out = {
             _collection: "items",
             _id: id,
             competitor_name: "DISCO",
@@ -305,6 +306,19 @@ if count <= 1000 || using_brand_filter
             variants: nil,
         }
         
+
+        pages << {
+            page_type: 'product',
+            url: url,
+            fetch_type: 'browser',
+            cookie: page['headers']['Cookie'],
+            driver: {goto_options: {waitUntil: "networkidle2", timeout: 60000}},
+            vars: page['vars'].merge({"product" => out})
+        }
+
+        save_pages(pages) if pages.length > 99
+        # save_outputs(outputs) if outputs.length > 99
+
     end
 
 else

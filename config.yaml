@@ -20,6 +20,9 @@ parsers:
   - page_type: before_listings
     file: "./parsers/before_listings.rb"
     disabled: false
+  - page_type: product
+    file: "./parsers/product.rb"
+    disabled: false
 exporters:
   - exporter_name: products_json
     exporter_type: json
