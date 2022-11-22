@@ -19,10 +19,10 @@ end
 
 json = JSON.parse(content)
 
-if !is_full_run
-    # cut categories by half 3 times
-    json = json.select.with_index{|_,i| (i+1) % 2 == 0}.select.with_index{|_,i| (i+1) % 2 == 0}
-end
+# if !is_full_run
+#     # cut categories by half 3 times
+#     json = json.select.with_index{|_,i| (i+1) % 2 == 0}.select.with_index{|_,i| (i+1) % 2 == 0}
+# end
 
 
 top_level = json
