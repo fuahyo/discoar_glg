@@ -2,20 +2,23 @@ seeder:
   file: ./seeder/seeder.rb
   disabled: false
 parsers:
-  - page_type: sub_categories
-    file: ./parsers/sub_categories.rb
+  - page_type: main_page
+    file: "./parsers/main_page.rb"
     disabled: false
-  - page_type: categories
-    file: ./parsers/categories.rb
+  - page_type: set_location
+    file: "./parsers/set_location.rb"
     disabled: false
-  - page_type: product
-    file: ./parsers/product.rb
+  - page_type: facets
+    file: "./parsers/facets.rb"
     disabled: false
-  - page_type: details
-    file: ./parsers/details.rb
+  - page_type: listings
+    file: "./parsers/listings.rb"
     disabled: false
-  - page_type: brand_search
-    file: ./parsers/brand_search.rb
+  - page_type: more_filters
+    file: "./parsers/more_filters.rb"
+    disabled: false
+  - page_type: before_listings
+    file: "./parsers/before_listings.rb"
     disabled: false
 exporters:
   - exporter_name: products_json
