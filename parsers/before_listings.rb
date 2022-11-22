@@ -99,6 +99,9 @@ if !json['data']['facets']['facets'].empty?
 
         category_2 = json['data']['facets']['facets'].select { |c| c['name'] =~ /Categor.a/i}
         if category_2.empty?
+            finish if page['vars']['slug'].first == "no-corresponde"
+            finish if page['vars']['slug'].first == "sin-categoria"
+
             raise "error: category_2 is empty, need more work"
         end
         
