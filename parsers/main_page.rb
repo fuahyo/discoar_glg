@@ -28,7 +28,7 @@ pages << {
       },
     body: '{"public":{"buyselectMethod":{"value":"recogida"},"regionId":{"value":"U1cjanVtYm9hcmdlbnRpbmFkMDM1"}}}',
     method: "POST",
-    http2: true
+    http2: true,
     fetch_type: "standard",
     vars: {
         cookie: cookie,
