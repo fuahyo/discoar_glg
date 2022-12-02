@@ -165,6 +165,7 @@ if count <= 1000 || using_brand_filter
             #/(?<!\S)(\d*[\.,]?\d+)\s?(s)(?!\S)/i,
             /(?<!\S)(\d*[\.,]?\d+)\s?(mm)(?!\S)/i,
             /(?<!\S)(\d*[\.,]?\d+)\s?(cm)(?!\S)/i,
+            /(?<!\S)(\d*[\.,]?\d+)\s?(cc)(?!\S)/i,
             /(?<!\S)(\d*[\.,]?\d+)\s?(m)(?!\S)/i,
             /(?<!\S)(\d*[\.,]?\d+)\s?(page[s]?)(?!\S)/i,
             /(?<!\S)(\d*[\.,]?\d+)\s?(bag)(?!\S)/i,
@@ -262,7 +263,7 @@ if count <= 1000 || using_brand_filter
         out = {
             _collection: "items",
             _id: id,
-            competitor_name: "DISCO",
+            competitor_name: "Disco",
             competitor_type: "dmart",
             store_name: "Disco Argentina",
             store_id: store_id,
