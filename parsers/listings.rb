@@ -313,7 +313,10 @@ if count <= 1000 || using_brand_filter
             url: url,
             fetch_type: 'browser',
             cookie: page['headers']['Cookie'],
-            driver: {goto_options: {waitUntil: "networkidle2", timeout: 60000}},
+            driver: {
+                code: "await sleep(10000);"
+                goto_options: {waitUntil: "networkidle2", timeout: 60000}
+            },
             vars: page['vars'].merge({"product" => out})
         }
 
