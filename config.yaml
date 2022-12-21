@@ -37,6 +37,7 @@ exporters:
     no_subfolder: true
     offset: 0
     order: desc
+    start_on_job_done: true
     fields:
       - header: "competitor_name"
         path: "competitor_name"
