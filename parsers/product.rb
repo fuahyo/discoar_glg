@@ -18,7 +18,6 @@ if product['base_price_lc'] != product['customer_price_lc']
     product['base_price_lc'] = product['customer_price_lc']
 end
 
-
 if !promo_text.nil? && !promo_text&.empty?
     product['is_promoted'] = true
     product['type_of_promotion'] = 'Banner'
@@ -31,6 +30,8 @@ if !promo_text.nil? && !promo_text&.empty?
         product['discount_percentage'] = promo_text.gsub('%', '').to_f
     end
 end
+
+product['description'] = product['description'].gsub!(/(<[^>]*>)|\n|\t/s) {" "}
 
 outputs << product
 
