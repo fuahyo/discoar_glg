@@ -31,7 +31,7 @@ if !promo_text.nil? && !promo_text&.empty?
     end
 end
 
-product['description'] = product['description'].gsub!(/(<[^>]*>)|\n|\t/s) {" "}
+product['description'] = product['description'].gsub(%r{</?[^>]+?>}, "")
 
 outputs << product
 
