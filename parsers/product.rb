@@ -1,12 +1,22 @@
 
 
+
+
+
 if content.nil?
-    raise 'fail fetch' if page['failed_response_code'] != 200
+    if page['failed_response_status_code'] != 200
+        if page['refetch_count'] < 2 
+            refetch page['gid']
+            finish
+        else
+            raise 'fail fetch' 
+        end
+    end
+    
     html = Nokogiri::HTML(failed_content)
 else 
     html = Nokogiri::HTML(content)
 end
-
 
 vars = page['vars']
 
