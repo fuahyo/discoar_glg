@@ -42,9 +42,10 @@ if !promo_text.nil? && !promo_text&.empty?
     promo_detail = [promo_text]
     product['promo_attributes'] = {promo_detail: "#{promo_detail.map{|t| "'#{t}'"}.join(', ')}"}.to_json
 
-    if promo_text&.include?('%') && promo_text =~ /[\-\d\s\%]/
+    if promo_text&.include?('%') && promo_text =~ /^[\-\d\s\%]+$/
         product['discount_percentage'] = promo_text.gsub(/\%|\-/, '').to_f
-        product['base_price_lc'] = (product['base_price_lc'].to_f * 1/(1 - (product['discount_percentage'] / 100))).to_f.round(1).to_s
+        # product['base_price_lc'] = (product['base_price_lc'].to_f * 1/(1 - (product['discount_percentage'] / 100))).to_f.round(1).to_s
+        product['customer_price_lc'] = (product['base_price_lc'].to_f * (1 - (product['discount_percentage'] / 100))).to_f.ceil.to_s
         product['has_discount'] = true
     end
 end

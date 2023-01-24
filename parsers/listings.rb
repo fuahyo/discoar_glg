@@ -317,7 +317,11 @@ if count <= 1000 || using_brand_filter
                 code: "await sleep(10000);",
                 goto_options: {waitUntil: "networkidle2", timeout: 60000}
             },
-            vars: page['vars'].merge({"product" => out})
+            vars: page['vars'].merge({
+                "parent_gid" => page['gid'],
+                "product" => out,
+                "sellers" => item['sellers'],
+            }),
         }
 
         save_pages(pages) if pages.length > 99
