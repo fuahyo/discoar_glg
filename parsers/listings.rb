@@ -301,7 +301,7 @@ if count <= 1000 || using_brand_filter
             reviews: nil,
             store_reviews: nil,
             item_attributes: item_attributes,
-            item_identifiers: item_identifiers,
+            item_identifiers: nil,
             page_number: page["vars"]["page_number"],
             country_of_origin: country_of_origin,
             variants: nil,
