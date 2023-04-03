@@ -14,6 +14,9 @@ while true
   records.each do |product|
     if product['is_available'] == true
         product['_collection'] = "available_products"
+        outputs << product
+
+        save_outputs(outputs) if outputs.count > 99
     end
   end
 
@@ -22,4 +25,4 @@ while true
   last_id = records.last['_id']
 end
 
-save_outputs(outputs)
+# save_outputs(outputs)
