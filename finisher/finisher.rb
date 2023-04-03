@@ -9,6 +9,8 @@ while true
   }
   records = find_outputs('items', query, 1, per_page)
 
+#   require 'byebug'
+#   byebug
   records.each do |product|
     if product['is_available'] == true
         product['_collection'] = "available_products"
