@@ -7,16 +7,21 @@ while true
     '_id' => {'$gt' => last_id},
     '$orderby' => [{'_id' => 1}]
   }
-  records = find_outputs('items', query, 1, per_page)
+  records = find_outputs('available_products', query, 1, per_page)
 
 #   require 'byebug'
 #   byebug
   records.each do |product|
-    if product['is_available'] == true
-        product['_collection'] = "available_products"
-        outputs << product
+    if product['name'].include? 'Un'
+      product_pieces_regex = [
+        /(\d+)\s?Un(?!\S)/i,
+        /(\d+)\s?Unidades(?!\S)/i,
+      ].find {|ppr| product['name'] =~ ppr}
+      product['product_pieces'] = product_pieces_regex ? $1.to_i : 1
+      # product['size_unit_std']
+      outputs << product
 
-        save_outputs(outputs) if outputs.count > 99
+      save_outputs(outputs) if outputs.count > 99
     end
   end
 
