@@ -196,6 +196,8 @@ if count <= 1000 || using_brand_filter
             /(\d+)\s?Rollos?(?!\S)/i,
             /(\d+)\s?piezas?(?!\S)/i,
             /(?<!\S)(\d+)\s?U(?!\S)/i,
+            /(\d+)\s?Un(?!\S)/i,
+            /(\d+)\s?Unidades(?!\S)/i,
         ].find {|ppr| name =~ ppr}
         product_pieces = product_pieces_regex ? $1.to_i : 1
         product_pieces = 1 if product_pieces == 0

@@ -3,7 +3,7 @@ seeder:
   disabled: false
 finisher:
   file: ./finisher/finisher.rb
-  disabled: false
+  disabled: true
 parsers:
   - page_type: main_page
     file: "./parsers/main_page.rb"
@@ -29,13 +29,13 @@ parsers:
 exporters:
   - exporter_name: products_json
     exporter_type: json
-    collection: available_products
+    collection: items
     offset: 0
     order: desc
     write_mode: pretty_array
   - exporter_name: items_csv
     exporter_type: csv
-    collection: available_products
+    collection: items
     export_filename: <d:yyyyMMdd>_Disco_AR
     no_subfolder: true
     offset: 0
