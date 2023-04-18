@@ -3,7 +3,7 @@ seeder:
   disabled: false
 finisher:
   file: ./finisher/finisher.rb
-  disabled: true
+  disabled: false
 parsers:
   - page_type: main_page
     file: "./parsers/main_page.rb"
