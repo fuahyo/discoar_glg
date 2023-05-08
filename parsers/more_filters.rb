@@ -56,7 +56,7 @@ if !json['data']['facets']['facets'].empty?
             variables_encoded = Base64.strict_encode64(variables)
             # puts variables_encoded
 
-            url = 'https://www.exito.com/_v/segment/graphql/v1?workspace=master&maxAge=short&appsEtag=remove&domain=store&locale=es-CO&operationName=productSearchV3&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"' + Sha256Hash::hash['productSearchV3'] + '","sender":"vtex.store-resources@0.x","provider":"vtex.search-graphql@0.x"},"variables":"' + variables_encoded + '"}'
+            url = 'https://www.disco.com.ar/_v/segment/graphql/v1?workspace=master&maxAge=short&appsEtag=remove&domain=store&locale=es-CO&operationName=productSearchV3&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"' + Sha256Hash::hash['productSearchV3'] + '","sender":"vtex.store-resources@0.x","provider":"vtex.search-graphql@0.x"},"variables":"' + variables_encoded + '"}'
             # if name == 'FINLANDEK'
             #     puts url
             #     exit!

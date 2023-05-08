@@ -28,7 +28,6 @@ first_page = vars['first_page']
 # puts first_page
 # exit!
 
-
 using_brand_filter = vars['using_brand_filter'] || false
 
 if count <= 1000 || using_brand_filter
@@ -317,7 +316,7 @@ if count <= 1000 || using_brand_filter
             cookie: page['headers']['Cookie'],
             driver: {
                 code: "await sleep(10000);",
-                goto_options: {waitUntil: "networkidle2", timeout: 60000}
+                goto_options: {waitUntil: "networkidle2", timeout: 3000}
             },
             vars: page['vars'].merge({
                 "parent_gid" => page['gid'],
@@ -332,7 +331,7 @@ if count <= 1000 || using_brand_filter
     end
 
 else
-    raise 'dont use more filters: rank will be screwed up'
+    # raise 'dont use more filters: rank will be screwed up'
     # queue filter list if products count > 1000
     
     variables = '{"hideUnavailableItems":false,"behavior":"dynamic","categoryTreeBehavior":"default","query":"' + vars['params']['query'] + '","map":"' + vars['params']['map'] + '","selectedFacets":' + JSON.generate(vars['params']['selectedFacets']) + ',"initialAttributes":"' + vars['params']['map'] + '"}'
