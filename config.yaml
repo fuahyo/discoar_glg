@@ -1,5 +1,5 @@
 seeder:
-  file: ./seeder/seeder.rb
+  file: ./seeder/seeder_old.rb
   disabled: false
 finisher:
   file: ./finisher/finisher.rb
