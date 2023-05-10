@@ -30,7 +30,7 @@ pages << {
     # http2: false,
     headers: {
         'X-DH-Session-ID' => "my_session"
-    }
+    },
     # fetch_type: 'browser',
     method: "GET",
     # driver: {
