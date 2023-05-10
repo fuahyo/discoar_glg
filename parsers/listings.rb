@@ -310,7 +310,10 @@ if count <= 1000 || using_brand_filter
             pages << {
                 page_type: 'product',
                 url: url,
-                fetch_type: 'browser',
+                headers: {
+                    'X-DH-Session-ID' => "my_session"
+                },
+                # fetch_type: 'browser',
                 cookie: page['headers']['Cookie'],
                 driver: {
                     code: "await sleep(10000);",
