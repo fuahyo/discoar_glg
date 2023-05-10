@@ -125,8 +125,6 @@ if count <= 1000 || using_brand_filter
 
         is_available = item['sellers'].first['commertialOffer']['AvailableQuantity'] > 0
 
-
-
         size_regex = [
             /(?<!\S)(\d*[\.,]?\d+)\s?(litre)(?!\S)/i,
             /(?<!\S)(\d*[\.,]?\d+)\s?(Litros)(?!\S)/i,
@@ -308,22 +306,23 @@ if count <= 1000 || using_brand_filter
             variants: nil,
         }
         
-
-        pages << {
-            page_type: 'product',
-            url: url,
-            fetch_type: 'browser',
-            cookie: page['headers']['Cookie'],
-            driver: {
-                code: "await sleep(10000);",
-                goto_options: {waitUntil: "networkidle2", timeout: 3000}
-            },
-            vars: page['vars'].merge({
-                "parent_gid" => page['gid'],
-                "product" => out,
-                "sellers" => item['sellers'],
-            }),
-        }
+        if is_available == true
+            pages << {
+                page_type: 'product',
+                url: url,
+                fetch_type: 'browser',
+                cookie: page['headers']['Cookie'],
+                driver: {
+                    code: "await sleep(10000);",
+                    goto_options: {waitUntil: "networkidle2", timeout: 60000}
+                },
+                vars: page['vars'].merge({
+                    "parent_gid" => page['gid'],
+                    "product" => out,
+                    "sellers" => item['sellers'],
+                }),
+            }
+        end
 
         save_pages(pages) if pages.length > 99
         # save_outputs(outputs) if outputs.length > 99
