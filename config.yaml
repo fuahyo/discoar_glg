@@ -35,7 +35,7 @@ exporters:
     write_mode: pretty_array
   - exporter_name: items_csv
     exporter_type: csv
-    collection: available_products
+    collection: items
     export_filename: <d:yyyyMMdd>_Disco_AR
     no_subfolder: true
     offset: 0
