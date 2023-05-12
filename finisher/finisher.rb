@@ -12,8 +12,8 @@ while true
 #   require 'byebug'
 #   byebug
   records.each do |product|
-    if product['is_available'] == true
-      product['_collection'] = "available_products"
+    if product['page_number'].nil?
+      product['page_number'] = 1
       outputs << product
 
       save_outputs(outputs) if outputs.count > 99
