@@ -269,7 +269,7 @@ if count <= 1000 || using_brand_filter
             country_iso: "AR",
             language: "ENG",
             currency_code_lc: "ARS",
-            scraped_at_timestamp: Time.now.strftime("%F %H:%M:%S"),
+            scraped_at_timestamp: (ENV['reparse'] == "1" ? (Time.parse(page['fetched_at']) + 1).strftime('%Y-%m-%d %H:%M:%S') : Time.parse(page['fetched_at']).strftime('%Y-%m-%d %H:%M:%S')),
             competitor_product_id: id,
             name: name,
             brand: brand,
