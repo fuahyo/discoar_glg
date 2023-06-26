@@ -81,12 +81,6 @@ if count <= 1000 || using_brand_filter
         end
     end
 
-
-    # queue product pages
-
-    #{"skipCategoryTree":true,"slug":"mix-cacao-de-origen-y-pretzels-consciente-130-gramo-148747","identifier":{"field":"id","value":"148747"}}
-
-
     json['data']['productSearch']['products'].each.with_index(1) do |product, idx|
         id = product['productId']
         name = product['productName']
