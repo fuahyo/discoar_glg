@@ -13,7 +13,8 @@ if !cookie || cookie.empty?
 end
 
 pages << {
-    url: 'https://www.disco.com.uy/api/sessions?sc=33',
+    # url: 'https://www.disco.com.uy/api/sessions?sc=33',
+    url: 'https://www.disco.com.uy/api/sessions',
     page_type: "set_location",
     headers: {
         'accept': '*/*',
