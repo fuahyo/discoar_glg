@@ -1,5 +1,5 @@
-input_vars:
- - name: reparse
+# input_vars:
+#  - name: reparse
 seeder:
   file: ./seeder/seeder.rb
   disabled: false
