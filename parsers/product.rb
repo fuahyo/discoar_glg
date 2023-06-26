@@ -30,6 +30,8 @@ product['discount_percentage'] = nil
 product['type_of_promotion'] = nil
 product['is_promoted'] = false
 product['promo_attributes'] = nil
+product['scraped_at_timestamp'] = (ENV['reparse'] == "1" ? (Time.parse(page['fetched_at']) + 1).strftime('%Y-%m-%d %H:%M:%S') : Time.parse(page['fetched_at']).strftime('%Y-%m-%d %H:%M:%S'))
+
 if product['base_price_lc'] != product['customer_price_lc']
     product['base_price_lc'] = product['customer_price_lc']
 end
