@@ -26,7 +26,8 @@ pages << {
         'referer': 'https://www.disco.com.uy/',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52'
       },
-    body: '{"public":{"buyselectMethod":{"value":"recogida"},"regionId":{"value":"U1cjanVtYm9hcmdlbnRpbmFkMDM1"}}}',
+    # body: '{"public":{"buyselectMethod":{"value":"recogida"},"regionId":{"value":"U1cjanVtYm9hcmdlbnRpbmFkMDM1"}}}',
+    body: '{"public":{"country":{"value":"URY"},"geoCoordinates":{"value":"-56.18187519999999,-34.914079"}}}',
     method: "POST",
     http2: true,
     fetch_type: "standard",
