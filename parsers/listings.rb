@@ -81,12 +81,6 @@ if count <= 1000 || using_brand_filter
         end
     end
 
-
-    # queue product pages
-
-    #{"skipCategoryTree":true,"slug":"mix-cacao-de-origen-y-pretzels-consciente-130-gramo-148747","identifier":{"field":"id","value":"148747"}}
-
-
     json['data']['productSearch']['products'].each.with_index(1) do |product, idx|
         id = product['productId']
         name = product['productName']
@@ -269,7 +263,7 @@ if count <= 1000 || using_brand_filter
             country_iso: "AR",
             language: "ENG",
             currency_code_lc: "ARS",
-            scraped_at_timestamp: (ENV['reparse'] == "1" ? (Time.parse(page['fetched_at']) + 1).strftime('%Y-%m-%d %H:%M:%S') : Time.parse(page['fetched_at']).strftime('%Y-%m-%d %H:%M:%S')),
+            scraped_at_timestamp: Time.now.strftime("%F %H:%M:%S"),
             competitor_product_id: id,
             name: name,
             brand: brand,
