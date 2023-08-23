@@ -4,8 +4,8 @@ class Sha256Hash
     # https://www.carulla.com/
     def self.hash
         {
-            "productSearchV3" => "40e207fe75d9dce4dfb3154442da4615f2b097b53887a0ae5449eb92d42e84db",
-            "facetsV2" => "b65cd34de12aee0b25ae3185197edf874847829ed1626b20efd5a94f17e64820",
+            "productSearchV3" => "97f345cd1295d67e2e7c6e46f67b7d4e4593b2f97c26b22b9e6b68f787eb12ac",
+            "facetsV2" => "0e2c17bcc215d6dfd84498821cc43785841f1a53ce9821ec0e57adf26f7cdb38",
             "Product" => "8255fe793a58cbaed1c190bf47f456f8a77478fed0f7bb17ce1139efc96ee574",
         }
     end
