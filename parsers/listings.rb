@@ -259,77 +259,85 @@ if count <= 1000 || using_brand_filter
 
         country_of_origin = nil #specs.select{|spec| spec['originalName'].include?('País de Origen')}.first['values'].first rescue nil
 
-        out = {
-            _collection: "items",
-            _id: id,
-            competitor_name: "Disco",
-            competitor_type: "dmart",
-            store_name: "Disco Argentina",
-            store_id: store_id,
-            country_iso: "AR",
-            language: "ENG",
-            currency_code_lc: "ARS",
-            scraped_at_timestamp: Time.now.strftime("%F %H:%M:%S"),
-            competitor_product_id: id,
-            name: name,
-            brand: brand,
-            category_id: category_id,
-            category: category,
-            sub_category: sub_category,
-            customer_price_lc: customer_price_lc.to_s,
-            base_price_lc: base_price_lc.to_s,
-            has_discount: has_discount,
-            discount_percentage: discount_percentage,
-            rank_in_listing: idx,
-            product_pieces: product_pieces,
-            size_std: size_std,
-            size_unit_std: size_unit_std,
-            description: description,
-            img_url: img_url,
-            barcode: barcode,
-            sku: id,
-            url: url,
-            is_available: is_available,
-            crawled_source: "WEB",
-            is_promoted: is_promoted,
-            type_of_promotion: type_of_promotion,
-            promo_attributes: promo_attributes,
-            is_private_label: is_private_label,
-            latitude: lat.to_s,
-            longitude: long.to_s,
-            reviews: nil,
-            store_reviews: nil,
-            item_attributes: item_attributes,
-            item_identifiers: nil,
-            page_number: page["vars"]["page_number"],
-            country_of_origin: country_of_origin,
-            variants: nil,
-        }
-        
-        if is_available == true
-            pages << {
-                page_type: 'product',
-                url: url,
-                # headers: {
-                #     'X-DH-Session-ID' => "my_session"
-                # },
-                fetch_type: 'browser',
-                cookie: page['headers']['Cookie'],
-                driver: {
-                    code: "await sleep(10000);",
-                    goto_options: {waitUntil: "networkidle2", timeout: 60000}
-                },
-                vars: page['vars'].merge({
-                    "parent_gid" => page['gid'],
-                    "product" => out,
-                    "sellers" => item['sellers'],
-                }),
+        if ENV['isDaily'] == 'true'
+            out ={
+                _collection: "items",
+                _id: id,
+                name: name,
+                base_price_lc: base_price_lc.to_s,
+                barcode: barcode,
             }
+            save_outputs(outputs) if outputs.length > 99
+        else
+            out = {
+                _collection: "items",
+                _id: id,
+                competitor_name: "Disco",
+                competitor_type: "dmart",
+                store_name: "Disco Argentina",
+                store_id: store_id,
+                country_iso: "AR",
+                language: "SPA",
+                currency_code_lc: "ARS",
+                scraped_at_timestamp: Time.now.strftime("%F %H:%M:%S"),
+                competitor_product_id: id,
+                name: name,
+                brand: brand,
+                category_id: category_id,
+                category: category,
+                sub_category: sub_category,
+                customer_price_lc: customer_price_lc.to_s,
+                base_price_lc: base_price_lc.to_s,
+                has_discount: has_discount,
+                discount_percentage: discount_percentage,
+                rank_in_listing: idx,
+                product_pieces: product_pieces,
+                size_std: size_std,
+                size_unit_std: size_unit_std,
+                description: description,
+                img_url: img_url,
+                barcode: barcode,
+                sku: id,
+                url: url,
+                is_available: is_available,
+                crawled_source: "WEB",
+                is_promoted: is_promoted,
+                type_of_promotion: type_of_promotion,
+                promo_attributes: promo_attributes,
+                is_private_label: is_private_label,
+                latitude: lat.to_s,
+                longitude: long.to_s,
+                reviews: nil,
+                store_reviews: nil,
+                item_attributes: item_attributes,
+                item_identifiers: nil,
+                page_number: page["vars"]["page_number"],
+                country_of_origin: country_of_origin,
+                variants: nil,
+            }
+            save_outputs(outputs) if outputs.length > 99
+            if is_available == true
+                pages << {
+                    page_type: 'product',
+                    url: url,
+                    # headers: {
+                    #     'X-DH-Session-ID' => "my_session"
+                    # },
+                    fetch_type: 'browser',
+                    cookie: page['headers']['Cookie'],
+                    driver: {
+                        code: "await sleep(10000);",
+                        goto_options: {waitUntil: "networkidle2", timeout: 60000}
+                    },
+                    vars: page['vars'].merge({
+                        "parent_gid" => page['gid'],
+                        "product" => out,
+                        "sellers" => item['sellers'],
+                    }),
+                }
+            end
+            save_pages(pages) if pages.length > 99
         end
-
-        save_pages(pages) if pages.length > 99
-        # save_outputs(outputs) if outputs.length > 99
-
     end
 
 else
