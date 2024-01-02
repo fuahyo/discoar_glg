@@ -101,8 +101,8 @@ if !json['data']['facets']['facets'].empty?
         if category_2.empty?
             finish if page['vars']['slug'].first == "no-corresponde"
             finish if page['vars']['slug'].first == "sin-categoria"
-
-            raise "error: category_2 is empty, need more work"
+            category_2 = json['data']['facets']['facets'].select { |c| c['name'] =~ /Departamento/}
+            # raise "error: category_2 is empty, need more work"
         end
         
         category_2.first['facets'].each do |cat|    
