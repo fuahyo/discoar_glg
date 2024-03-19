@@ -258,9 +258,9 @@ if count <= 1000 || using_brand_filter
         item_identifiers = (barcode.nil? || barcode&.empty?) ? nil : {barcode:"'#{barcode}'"}.to_json
 
         country_of_origin = nil #specs.select{|spec| spec['originalName'].include?('País de Origen')}.first['values'].first rescue nil
-
+        # require 'byebug'; byebug
         if ENV['isDaily'] == 'true'
-            out ={
+            outputs << {
                 _collection: "items",
                 _id: id,
                 name: name,
@@ -315,7 +315,7 @@ if count <= 1000 || using_brand_filter
                 country_of_origin: country_of_origin,
                 variants: nil,
             }
-            save_outputs(outputs) if outputs.length > 99
+            # save_outputs(outputs) if outputs.length > 99
             if is_available == true
                 pages << {
                     page_type: 'product',
