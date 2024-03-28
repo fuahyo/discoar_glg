@@ -40,14 +40,14 @@ slug = page['url'].gsub("https://www.disco.com.ar", "").strip
 price_container = html.css('a').find{|s| s['href'] == slug}.css('div[class*="discoargentina-store-theme"]') rescue []
 all_price = []
 price_container.each do |s|
-    all_price << s.text if s.text !~ /[a-zA-Z]/
+    all_price << s.text.gsub(/[$.]/, "").gsub(",", ".").to_f if s.text !~ /[a-zA-Z]/
 end
 
 all_price.uniq!
 
 if all_price.size > 1
-    product['customer_price_lc'] = all_price.min.gsub(/[$.]/, "").gsub(",", ".").to_f
-    product['base_price_lc'] = all_price.max.gsub(/[$.]/, "").gsub(",", ".").to_f
+    product['customer_price_lc'] = all_price.min
+    product['base_price_lc'] = all_price.max
     discount = (((product['base_price_lc'].to_f - product['customer_price_lc'].to_f)/product['base_price_lc'].to_f)*100).to_f.round(7)
     product['discount_percentage'] = discount
     product['has_discount'] = true
