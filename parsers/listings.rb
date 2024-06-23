@@ -200,7 +200,26 @@ if count <= 1000 || using_brand_filter
         product_pieces = 1 if product_pieces == 0
         product_pieces ||= 1
 
-        description = product['description']
+        HTML_ENTITIES = {
+            '&nbsp;'   => ' ',
+            '&ntilde;' => 'ñ',
+            '&iacute;' => 'í',
+            '&aacute;' => 'á',
+            '&uacute;' => 'ú',
+            '&oacute;' => 'ó',
+            '&eacute;' => 'é',
+            '&agrave;' => 'à',
+            '&iexcl;'  => '¡',
+            '&reg;'    => '®',
+            '&bull;'   => '•',
+            '&iquest;' => '¿',
+            '&ordm;'   => 'º',
+            '&deg;'    => '°',
+            '&hellip;' => '…',
+            '&rsquo;'  => '’'
+        }
+
+        description = product['description'].gsub(/#{Regexp.union(HTML_ENTITIES.keys)}/, HTML_ENTITIES)
 
         img_url = item['images'].first['imageUrl']
 

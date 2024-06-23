@@ -8,12 +8,12 @@ parsers:
   - page_type: main_page
     file: "./parsers/main_page.rb"
     disabled: false
-#   - page_type: set_location
-#     file: "./parsers/set_location.rb"
-#     disabled: false
-#   - page_type: facets
-#     file: "./parsers/facets.rb"
-#     disabled: false
+  - page_type: set_location
+    file: "./parsers/set_location.rb"
+    disabled: false
+  - page_type: facets
+    file: "./parsers/facets.rb"
+    disabled: false
 #   - page_type: listings
 #     file: "./parsers/listings.rb"
 #     disabled: false
